@@ -1,0 +1,18 @@
+RUCA,RUCA_Des,c_type
+1,"Metropolitan area core: primary flow within an urbanized area of 50,000 and greater",Urban
+1.1,"Secondary flow 30% to <50% to a larger urbanized area of 50,000 and greater",Urban
+2,"Metropolitan area high commuting: primary flow 30% or more to a urbanized area of 50,000 and greater",Urban
+2.1,"Secondary flow 30% to <50% to a larger urbanized area of 50,000 and greater",Urban
+3,"Metropolitan area low commuting: primary flow 10% to <30% to a urbanized area of 50,000 and greater",Urban
+4,"Micropolitan area core: primary flow within an urban cluster of 10,000 to 49,999",Rural
+4.1,"Secondary flow 30% to <50% to a urbanized area of 50,000 and greater",Rural
+5,"Micropolitan high commuting: primary flow 30% or more to a urban cluster of 10,000 to 49,999",Rural
+6,"Micropolitan low commuting: primary flow 10% to <30% to a urban cluster of 10,000 to 49,999",Rural
+7,"Small town core: primary flow within an urban cluster of 2,500 to 9,999",Rural
+7.1,"Secondary flow 30% to <50% to a urbanized area of 50,000 and greater",Rural
+7.2,"Secondary flow 30% to <50% to a urban cluster of 10,000 to 49,999",Rural
+8,"Small town high commuting: primary flow 30% or more to a urban cluster of 2,500 to 9,999",Rural
+9,"Small town low commuting: primary flow 10% to <30% to a urban cluster of 2,500 to 9,999",Rural
+10,"Rural areas: primary flow to a tract outside a urbanized area of 50,000 and greater or UC",Rural
+10.2,"Secondary flow 30% to <50% to a urban cluster of 10,000 to 49,999",Rural
+99,Unknown,Rural
