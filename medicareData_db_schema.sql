@@ -1,4 +1,4 @@
---Creating tables for the csv file
+--Creating tables for the csv files
 CREATE TABLE medicare_data (
 	id serial PRIMARY KEY,
 	state VARCHAR(4) NOT NULL,
@@ -13,6 +13,10 @@ CREATE TABLE medicare_data (
 	avg_oop FLOAT NOT NULL
 );
 
-DROP TABLE medicare_data;
-
-SELECT * FROM medicare_data;
+CREATE TABLE stats_table (
+	id serial PRIMARY KEY,
+	state VARCHAR(4) NOT NULL,
+	total_discharges INT NOT NULL,
+	avg_oop FLOAT NOT NULL,
+	avg_insured FLOAT NOT NULL
+);
