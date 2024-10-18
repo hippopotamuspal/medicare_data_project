@@ -9,7 +9,6 @@ from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, inspect, text
 from flask import Flask, jsonify, render_template, Response
-from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 
 #################################################
@@ -50,12 +49,14 @@ def index():
     return render_template("index.html")
 
 # Defining the route to the state pages
-@app.route("/states")
+@app.route("/state_list")
 def states():
     #Running a query to find all unique states and return a list of them
     states = pd.read_sql("SELECT state FROM medicare_data", engine)
     state_list = states['state'].unique()
-    return jsonify(state_list.tolist())
+    state_list = state_list.tolist()
+    state_list = sorted(state_list)
+    return jsonify(state_list)
 
 # Route to the Average Covered Charge
 @app.route("/avg_covered_charge/<state>")

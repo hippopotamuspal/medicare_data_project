@@ -1,20 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Medicare Analysis across the US</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Medicare Data Visualization by State</title>
+  
+  <!-- Link to bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  
+  <!-- Plotly for pie and bar charts -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  
+  <!-- Leaflet.js for choropleth map visualization -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+</head>
 
     <body>
 
         <div class="container">
           <div class="row">
             <div class="col-md-12 p-5 text-center bg-light">
-              <h1>Belly Button Biodiversity Dashboard</h1>
+              <h1>Medicare Analysis across the US</h1>
               <p>Use the interactive charts below to explore the dataset</p>
             </div>
           </div>
@@ -44,9 +54,54 @@
           </div>
         </div>
       
-        <script src="https://d3js.org/d3.v7.min.js"></script>
-        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-        <script src="./static/js/app.js"></script>
+      <header>
+          <h1 class="text-center">Medicare Data Visualization by State</h1>
+          <p class="text-center">Select a state from the dropdown to see detailed visualizations of 2022 Medicare data in that State:</p>
+      </header>
+  
+      <!-- Dropdown to select a state -->
+      <section class="container">
+          <label for="stateSelect">Select a State:</label>
+           <!--Create the toggle switch in which the user can change between neighborhoods to display different information -->
+           <select id="state" onchange="optionChanged(this.value)"></select>
+  
+  
+       <!-- Filter section to choose what to display -->
+       <section class="container">
+          <label for="dataFilter">Select Data to Display:</label>
+          <select id="dataFilter" class="form-select">
+              <option value="avg_oop">Average Out-of-Pocket Payment</option>
+              <option value="avg_medicare_payment">Average Medicare Payment</option>
+              <option value="total_discharges">Total Number of Discharges</option>
+          </select>
+      </section>
+  
+      </section>
+  
+       <!-- Map Section for State Choropleth Visualization -->
+       <section class="container">
+          <h2>State-Level Healthcare Cost Distribution</h2>
+          <div id="map" style="width: 100%; height: 500px;"></div> <!-- Plotly map container -->
+      </section>
+  
+      <!-- Horizontal Bar Chart for Top 10 Conditions -->
+      <section class="container">
+          <h2>Top 10 Conditions by State</h2>
+          <!-- Plotly bar chart container -->
+          <div id="topConditionsChart" style="width: 100%; height: 400px;"></div>
+      </section>
+  
+      <!-- Pie Chart for Payment Breakdown -->
+      <section class="container">
+          <h2>Payment Breakdown: Out-of-Pocket vs Medicare Payment vs Average Covered Charge</h2>
+          <!-- Plotly pie chart container -->
+          <div id="paymentBreakdownChart" style="width: 100%; height: 400px;"></div>
+      </section>
+  
+      <!-- Link to your JavaScript file -->
+      <script src="https://d3js.org/d3.v7.min.js"></script>
+      <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+      <script src="./static/js/app.js"></script>  
       
       </body>
       
