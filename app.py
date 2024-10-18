@@ -75,77 +75,20 @@ def national_stats():
     # Return the result as a JSON response
     return jsonify(result)
 
-
-# Route to the Average Covered Charge
-@app.route("/avg_covered_charge/<state>")
-def avg_covered_charge(state):
-    # Query to fetch only relevant columns for the given state
+# Route to the StateDB
+@app.route("/db_info/<state>")
+def db_info(state):
+    
     query = """
-        SELECT zip, mdc_code, avg_covered_charge 
+        SELECT zip, mdc_code, avg_covered_charge, avg_total_payment, avg_medicare_payment, avg_oop
         FROM medicare_data 
         WHERE state = %s
     """
     # Execute query and store result in a DataFrame
-    avg_covered_charge_data = pd.read_sql(query, engine, params=(state,))
+    state_data = pd.read_sql(query, engine, params=(state,))
     
     # Convert DataFrame to a list of dictionaries
-    result = avg_covered_charge_data.to_dict(orient="records")
-    
-    # Return the result as a JSON response
-    return jsonify(result)
-
-
-# Route to the Average Total Payment
-@app.route("/avg_total_payment/<state>")
-def avg_total_payment(state):
-    # Query to fetch only relevant columns for the given state
-    query = """
-        SELECT zip, mdc_code, avg_total_payment 
-        FROM medicare_data 
-        WHERE state = %s
-    """
-    # Execute query and store result in a DataFrame
-    avg_total_payment_data = pd.read_sql(query, engine, params=(state,))
-    
-    # Convert DataFrame to a list of dictionaries
-    result = avg_total_payment_data.to_dict(orient="records")
-    
-    # Return the result as a JSON response
-    return jsonify(result)
-
-
-# Route to the Average Medicare Payment
-@app.route("/avg_medicare_payment/<state>")
-def avg_medicare_payment(state):
-    # Query to fetch only relevant columns for the given state
-    query = """
-        SELECT zip, mdc_code, avg_medicare_payment 
-        FROM medicare_data 
-        WHERE state = %s
-    """
-    # Execute query and store result in a DataFrame
-    avg_medicare_payment_data = pd.read_sql(query, engine, params=(state,))
-    
-    # Convert DataFrame to a list of dictionaries
-    result = avg_medicare_payment_data.to_dict(orient="records")
-    
-    # Return the result as a JSON response
-    return jsonify(result)
-
-# Route to the Average Out of Pocket
-@app.route("/avg_oop/<state>")
-def avg_oop(state):
-    # Query to fetch only relevant columns for the given state
-    query = """
-        SELECT zip, mdc_code, avg_oop 
-        FROM medicare_data 
-        WHERE state = %s
-    """
-    # Execute query and store result in a DataFrame
-    avg_oop_data = pd.read_sql(query, engine, params=(state,))
-    
-    # Convert DataFrame to a list of dictionaries
-    result = avg_oop_data.to_dict(orient="records")
+    result = state_data.to_dict(orient="records")
     
     # Return the result as a JSON response
     return jsonify(result)

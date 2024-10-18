@@ -19,40 +19,19 @@
 
 </head>
 
-    <body>
+  <body>
 
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12 p-5 text-center bg-light">
-              <h1>Medicare Analysis across the US</h1>
-              <p>Use the interactive charts below to explore the dataset</p>
-            </div>
-          </div>
-          <br>
-          <div class="row">
-            <div class="col-md-3">
-              <div class="card card-body bg-light">
-                <h6>Test Subject ID Number:</h6>
-                <select id="selDataset" onchange="optionChanged(this.value)"></select>
-              </div>
-              <br>
-              <div class="card card-primary">
-                <div class="card-header">
-                  <h4 class="card-title">Demographic Info</h4>
-                </div>
-                <div id="sample-metadata" class="card-body"></div>
-              </div>
-            </div>
-            <div class="col-md-9">
-              <div id="bar"></div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div id="bubble"></div>
-            </div>
-          </div>
-        </div>
+      <div class="container">
+        <h1 class="text-center">Medicare Analysis across the US</h1>
+        <p class="text-center">Use the interactive charts below to explore the dataset</p>
+    
+        <h6>Select Data to Display:</h6>
+        <select id="dataFilterNational" onchange="updateChoropleth(this.value)">
+          <option value="avg_oop">Average Out-of-Pocket Payment</option>
+          <option value="avg_medicare_payment">Average Medicare Payment</option>
+          <option value="total_discharges">Total Number of Discharges</option>
+        </select>
+        <div id="nationalChloropleth" style="width: 100%; height: 500px;"></div>
       
       <header>
           <h1 class="text-center">Medicare Data Visualization by State</h1>
@@ -103,7 +82,7 @@
       <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
       <script src="./static/js/app.js"></script>  
       
-      </body>
+    </body>
       
       
 </html>
