@@ -1,7 +1,6 @@
 CREATE TABLE medicare_data (
 	id serial PRIMARY KEY,
 	state VARCHAR(4) NOT NULL,
-	county VARCHAR(40) NOT NULL,
 	zip INT NOT NULL,
 	c_type VARCHAR(6) NOT NULL,
 	mdc_code VARCHAR(10) NOT NULL,
