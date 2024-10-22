@@ -78,7 +78,7 @@ def national_stats():
 def db_info(state):
     
     query = """
-        SELECT zip, mdc_code, avg_covered_charge, avg_total_payment, avg_medicare_payment, avg_oop
+        SELECT zip, mdc_code,mdc_desc, discharges, avg_covered_charge, avg_total_payment, avg_medicare_payment, avg_oop
         FROM medicare_data 
         WHERE state = %s
     """
