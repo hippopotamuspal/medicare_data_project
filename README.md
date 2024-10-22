@@ -59,6 +59,11 @@ After writing the table schema, we went through the process outlined in the Inst
 
 We used JavaScript and HTML to build the site which allows the user to interact with the data set. The HTML file, titled `index.html`, can be found in the `templates` folder. The JavaScript file, titled `app.js`, can be found in the `static` folder.
 
+### New Library - Bootstrap
+[INSERT BOOTSTRAP DISCUSSION HERE]
+
+### Data Ethics
+The dataset used for this project was already aggregated, ensuring that no personally identifiable information was included. To maintain transparency, all data cleaning steps, assumptions, and transformations have been documented and shared with lecturers. This ensures the reproducibility of the analysis and holds us accountable for any decisions made based on this work. The findings from this analysis are intended solely for use by the Data Analytics and Visualization Bootcamp at the University of Minnesota.
 
 ## Sources
 Original data set: https://data.cms.gov/provider-summary-by-type-of-service/medicare-inpatient-hospitals/medicare-inpatient-hospitals-by-provider-and-service/data
