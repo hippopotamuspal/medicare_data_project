@@ -1,5 +1,8 @@
 # The Cost of Healthcare in the United States
-## Navigation
+### Quinn Daley - Nicholas Fussy - Joseph Kennedy - William Levine
+
+## Overview
+
 ## Instructions
 The following libraries must be installed to run the code in this repository:
 
@@ -34,7 +37,26 @@ For `stats_table`, import the file titled `stats_table.csv`. Follow the same pro
 
 Open an anaconda prompt or your python environment of choice. Change your directory to your local repository, and run the command `python app.py`. In your browser, paste the URL that prints in the python environment. The visualization tool should load and allow you to interact with the data.
 
-
-
 ## Process
+
+### Data Cleaning
+
+After downloading the original dataset, titled `MUP_INP_RY24_P03_V10_DY22_PrvSvc.CSV` and stored in the `Resources` folder, we cleaned the data using Python and pandas. This process is documented in the Jupyter Notebook file titled `medicare_analysis.ipynb`. To clean this data, we dropped unnecessary columns, renamed the kept columns, calculated and created a column for the average out-of-pocket costs, and ensured data types were properly set for each column. The original data set had Diagnosis Related Group (DRG) codes; we chose to use Major Diagnostic Category (MDC) codes instead, as there are fewer of them and they are more easily understood by those outside of the medical field. Each DRG code has a corresponding MDC code; they were mapped using the file `DRG_to_MDC_Crosswalk.xlsx` found in the `Resources` folder, and then merged to the cleaned data set in pandas. This final dataframe was then exported as a .csv titled `cleanedmedicaredata.csv`, found in the main repository.
+
+To create a data frame which gives average stats per state, we imported this cleaned csv into pandas. We ran a `groupby()` function on the state column to give the average number of total discharges, average out-of-pocket costs, and average amounts paid by Medicare in each state. These commands can be found in `stats_grouping.ipynb`, held in the main repository. This dataframe was then exported as `stats_table.csv`.
+
+### Back End
+
+After writing the table schema, we went through the process outlined in the Instructions section above. An Entity Relationship Diagram (ERD) of the database tables can be found in the `ERD.png` file, which gives a quick visual reference for what columns are in each table and their respective data types. After the data was imported into a PostgreSQL database in pgAdmin 4, we could use SQLAlchemy in our `app.py` file to send the data to a Flask API, with different routes available for different queries on the data. This `app.py` can be found in the main repository.
+
+### Front End
+
+We used JavaScript and HTML to build the site which allows the user to interact with the data set. The HTML file, titled `index.html`, can be found in the `templates` folder. The JavaScript file, titled `app.js`, can be found in the `static` folder.
+
+
 ## Sources
+Original data set: https://data.cms.gov/provider-summary-by-type-of-service/medicare-inpatient-hospitals/medicare-inpatient-hospitals-by-provider-and-service/data
+
+DRG-to-MDC code reference: https://www.cms.gov/icd10m/version372-fullcode-cms/fullcode_cms/P0002.html
+
+US States GEOJSON: https://github.com/PublicaMundi/MappingAPI/blob/master/data/geojson/us-states.json
