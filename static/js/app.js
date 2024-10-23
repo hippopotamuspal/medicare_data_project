@@ -59,7 +59,27 @@ function updateChoropleth(selectedValue) {
             updateLegend(minValue, maxValue, selectedValue);
         });
     });
+    // Update the description of the choropleth based on the selected option
+    let infoText;
+    switch (selectedValue) {
+        case 'avg_oop':
+            infoText = 'Average Out-of-Pocket (OOP) Payment: This represents the average amount paid by patients after Medicare pays their portion.';
+            break;
+        case 'avg_insured':
+            infoText = 'Average Medicare Payment: This represents the average payment that Medicare covers for hospital services.';
+            break;
+        case 'total_discharges':
+            infoText = 'Total Number of Discharges: This shows the total count of hospital discharges for all MDC codes across the United States.';
+            break;
+        default:
+            infoText = 'Definition body.';
+            break;
+    }
+
+    // Update the description's content
+    document.getElementById('infoText').innerText = infoText;
 }
+
 // Function to get a color based on the value using a gradient
 function getColor(value, minValue, maxValue, selectedMetric) {
     // Define color scales based on the metric
@@ -142,7 +162,6 @@ document.getElementById('dataFilterNational').addEventListener('change', functio
     updateChoropleth(this.value);
 });
 
-
 //State Information
 function buildMetadata(state) {
     // Define the path to the pricesummary data
@@ -155,14 +174,10 @@ function buildMetadata(state) {
       // Use `.html("") to clear any existing metadata
       state_data.html("");
       console.log("Cleared existing metadata")
-      // Use `Object.entries` to add each key and value pair to the panel
-      Object.entries(state).forEach(function ([key, value]) {
-        state_data.append("h6");
-      });
     });
-  }
+}
 
-  function buildCharts(state) {
+function buildCharts(state) {
     //log state that was selected
     console.log("Fetching data for state:", state);  
     
@@ -213,6 +228,13 @@ function buildMetadata(state) {
             }
         });
 
+        function truncateLabels(labels, maxLength) {
+            return labels.map(label => label.length > maxLength ? label.slice(0, maxLength) + '...' : label);
+        }
+
+        // Assuming mdc_desc contains your y-axis labels
+        let truncatedLabels = truncateLabels(mdc_desc, 35); // Truncate to 45 characters
+
         //Log the metric values for the selected
         console.log(`Metric Values for ${selectedMetric}:`, metric_values);
 
@@ -224,21 +246,44 @@ function buildMetadata(state) {
             orientation: 'h',
             marker: {
                 color: 'deep sapphire'
-            }
+            },
+            hoverinfo: 'text', // Show custom text on hover
+            hovertext: mdc_desc.map((desc, index) => {
+                // Format the value based on the selected metric
+                let value = metric_values[index];
+                let formattedValue;
+                if (selectedMetric === 'avg_oop' || selectedMetric === 'avg_medicare_payment') {
+                    formattedValue = `$${value.toFixed(2)}`; // Format as currency
+                } else {
+                    formattedValue = value.toString(); // Show as plain number
+                }
+                return `${desc}<br>${formattedValue}`; // Combine description and formatted value
+            }),
         };
 
         //Adjust chart height based on the number of bars
         let chartHeight = Math.max(sortedData.length * 60, 600); 
 
+        // Determine the tick format based on the selected metric
+        let xAxisTickFormat;
+        if (selectedMetric === 'avg_oop' || selectedMetric === 'avg_medicare_payment') {
+            xAxisTickFormat = '$,.2f'; // Format as currency with two decimal places
+        } else {
+            xAxisTickFormat = ',d'; // Format as a plain number
+        }
+
         let bar_layout = {
             title: `Top 10 MDC Codes by ${selectedMetric} in ${state}`,
             xaxis: { 
                 title: selectedMetric,
-                automargin: true
+                automargin: true,
+                tickformat: xAxisTickFormat
             },
             yaxis: { 
                 title: 'MDC Description',
                 automargin: true,
+                tickvals: mdc_desc,
+                ticktext: truncatedLabels,
                 tickfont: { size: 12 }
             },
             margin: {
@@ -262,10 +307,25 @@ function buildMetadata(state) {
 
         console.log("Covered Charge:", avg_covered_charge, "Medicare Payment:", avg_medicare_payment, "Out-of-Pocket:", avg_oop);
 
+        // Format values as currency
+        let currencyFormatter = new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD'
+        });
+
+        let formatted_values = [
+            currencyFormatter.format(avg_covered_charge),
+            currencyFormatter.format(avg_medicare_payment),
+            currencyFormatter.format(avg_oop)
+        ];
+
         let pie_data = {
             values: [avg_covered_charge, avg_medicare_payment, avg_oop],
             labels: ['Average Covered Charge', 'Medicare Payment', 'Out-of-Pocket Payment'],
             type: 'pie',
+            textinfo: 'label+percent', // Show label and value on the pie chart
+            text: formatted_values, // Use formatted values for hover text
+            hoverinfo: 'label+text',
             marker: {
                 colors: ['rgba(13, 52, 143, 0.7)',  // Variation of Blue
                          'rgba(20, 80, 180, 0.7)',  // Variation of Blue
@@ -274,7 +334,7 @@ function buildMetadata(state) {
             }
         };
         let pie_layout = {
-            title: `Payment Breakdown for ${state}`
+            title: `Payment Breakdown:<br>Out-of-Pocket vs Medicare Payment vs Average Covered Charge for ${state}`
         };
         //pie chart
         Plotly.newPlot('paymentBreakdownChart', [pie_data], pie_layout);

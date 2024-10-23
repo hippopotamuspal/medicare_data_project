@@ -28,9 +28,8 @@
 </head>
 
 <body class="bg-space-gray text-white">
-
-<!-- National Choropleth -->
     <br>
+    <!-- National Choropleth -->
     <div class="container">
       <h1 class="text-center">Medicare Analysis across the US</h1>
       <p class="text-center">Use the interactive charts below to explore the dataset</p>
@@ -51,52 +50,72 @@
                     <br>
                     <div class="card card-primary">
                         <div class="card-header">
+                          <h4 class="card-title">Description</h4>
+                        </div>
+                        <div id="infoText" class="card-body">Description body.</div>
+                    </div>
+                    <br>
+                    <div class="card card-secondary">
+                        <div class="card-header">
                           <h4 class="card-title">Definitions</h4>
                         </div>
-                        <div id="definition" class="card-body"></div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">OOP: Out-of-Pocket</li>
+                            <li class="list-group-item">MDC Code: Major Diagnostic Category (MDC) Code</li>
+                          </ul>
                     </div>
                 </div>
                 <div class="col-md-9">
                     <div id="nationalChoropleth" class="text-black" style="width: 100%; height: 500px; text-align: left;"></div>
                 </div>
+            </div>
         </div>
     </div>  
-      
     <br>
-
-      <header>
-          <h1 class="text-center">Medicare Data Visualization by State</h1>
-          <p class="text-center">Select a state from the dropdown to see detailed visualizations of 2022 Medicare data in that State:</p>
-      </header>
-  
+    <br>
+    <br>
+    <!-- State Analysis Section -->
+    <header>
+        <h1 class="text-center">Medicare Data Visualization by State</h1>
+        <p class="text-center">Select a state from the dropdown to see detailed visualizations of 2022 Medicare data in that State:</p>
+    </header>
+    <br>
     <!-- Dropdown to select a state -->
-    <section class="container">
-        <label for="stateSelect">Select a State:</label>
-        <select id="state" onchange="optionChanged(this.value)"></select>
-
-    <!-- Filter section to choose what to display -->
-    <section class="container">
-        <label for="dataFilter">Select Data to Display:</label>
-        <select id="dataFilter" class="form-select">
-            <option value="avg_oop">Average Out-of-Pocket Payment</option>
-            <option value="avg_medicare_payment">Average Medicare Payment</option>
-            <option value="discharges">Total Number of Discharges</option>
-        </select>
-    </section>
-
-    </section>
-
-    <!-- Pie Chart for Payment Breakdown -->
-    <section class="container">
-        <h2>Payment Breakdown: Out-of-Pocket vs Medicare Payment vs Average Covered Charge</h2>
-        <div id="paymentBreakdownChart" style="width: 100%; height: 400px;"></div>
-    </section>
-
+    <div class="container">
+        <div class="container text-center">
+            <div class="row justify-content-md-center">
+                <div class="col-md-3">
+                    <div class="card card-body bg-light">
+                        <div class="card-header">
+                            <label for="state" class="text-black">Select a State:</label>
+                            <select id="state" class="form-select text-center" onchange="optionChanged(this.value)"></select>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="card card-secondary">
+                        <label for="dataFilter" class="text-black">Select Data to Display:</label>
+                        <select id="dataFilter" class="form-select text-center">
+                            <option value="avg_oop">Average Out-of-Pocket Payment</option>
+                            <option value="avg_medicare_payment">Average Medicare Payment</option>
+                            <option value="discharges">Total Number of Discharges</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <div id="paymentBreakdownChart" style="width: 100%; height: 400px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
     <!-- Horizontal Bar Chart for Top 10 Conditions -->
     <section class="container">
     <h2>Top 10 MDC Codes by State</h2>
     <div id="topConditionsChart" style="width: auto; height: auto;"></div>
     </section>
+    <br>
+    <br>
+    <br>
   
     <!-- Link to your JavaScript file -->
     <script src="https://d3js.org/d3.v7.min.js"></script>

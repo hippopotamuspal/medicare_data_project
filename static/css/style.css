@@ -20,3 +20,15 @@ body {
 .bg-space-gray {
     background-color: #2e2e2e !important; /* Ensures the class takes precedence */
 }
+
+.card-primary {
+  width: 300px; /* Set a fixed width */
+  height: 190px; /* Set a fixed height */
+  overflow: hidden; /* Prevent overflow of content */
+  border: 1px solid #ccc; /* Optional: for better visibility */
+}
+
+.card-body {
+  max-height: 150px; /* Limit the height of the card body */
+  overflow-y: auto; /* Allow scrolling for overflow */
+}
