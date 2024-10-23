@@ -5,7 +5,7 @@
 This repository contains the necessary resources to run a webpage which visualizes data from Medicare Inpatient Hospitals in 2022. It has information for location, service/diagnosis type, total discharges, out-of-pocket costs, and amounts covered by Medicare. The webpage aims to answer the following questions about the data:
 - How does healthcare cost vary by state?
 - What are the top 10 most frequent, most expensive, or most insured diagnoses in any given US State?
-- For a given location, what proportion of a healthcare costs are paid by Medicare, and what proportion are paid by the patient? How much of the total cost do both combined cover?
+- For a given location, what proportion of healthcare costs are paid by Medicare, and what proportion are paid by the patient? How much of the total cost do both combined cover?
 
 To answer these questions, the site shows a choropleth of the US, which can be filtered by the user to show average out-of-pocket payments, average medicare payments, and total inpatient discharges per state. A darker color on the choropleth indicates a higher value for the metric. A bar chart, which can be filtered by the same metrics as well as by state, shows the top medical conditions or services in that state for the selected metric. A pie chart shows the average proportion of costs paid by the patient and by Medicare for that state, and how much of the total cover charge these payments account for.
 
