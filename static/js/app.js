@@ -4,6 +4,7 @@ let map = L.map('nationalChoropleth').setView([37.8, -96], 4);
 // Add a tile layer
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 // Global variable to hold GeoJSON layer and legend
 let geojsonLayer;
