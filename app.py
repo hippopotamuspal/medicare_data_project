@@ -19,7 +19,7 @@ app = Flask(__name__)
 # Load environment variables from .env
 load_dotenv()
 
-# Replace with your actual DATABASE_URL
+# Call the database URL from the .env file
 DATABASE_URL = os.getenv('DATABASE_URL')
 
 # Create SQLAlchemy engine
@@ -92,7 +92,3 @@ def db_info(state):
 # Run the Application
 if __name__ == '__main__':
     app.run(debug=True)
-
-# Run the Application
-if __name__ == '__main__':
-     app.run(debug=True)

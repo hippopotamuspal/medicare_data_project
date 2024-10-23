@@ -51,8 +51,8 @@ function updateChoropleth(selectedValue) {
                 onEachFeature: function(feature, layer) {
                     // Format the value as currency for monetary metrics or with commas for total discharges
                     const formattedValue = (selectedValue === 'total_discharges')
-                        ? formatNumberWithCommas(feature.properties.value) // Format with commas for total discharges
-                        : formatCurrency(feature.properties.value); // Format as USD for monetary values
+                        ? formatNumberWithCommas(feature.properties.value)
+                        : formatCurrency(feature.properties.value);
                     layer.bindPopup(feature.properties.name + ': ' + formattedValue);
                 }
             }).addTo(map);
@@ -119,10 +119,10 @@ function updateLegend(minValue, maxValue, selectedMetric) {
     legend.onAdd = function (map) {
         const div = L.DomUtil.create('div', 'info legend');
         // Style the legend box with a white background and padding
-        div.style.backgroundColor = 'white';  // White background
-        div.style.padding = '10px';           // Padding for the content
-        div.style.border = '2px solid black'; // Optional border for the legend box
-        div.style.borderRadius = '5px';       // Optional border radius for rounded corners
+        div.style.backgroundColor = 'white';  
+        div.style.padding = '10px';           
+        div.style.border = '2px solid black'; 
+        div.style.borderRadius = '5px';       
         // Add a title based on the selected metric
         let title = '';
         if (selectedMetric === 'total_discharges') {
@@ -133,8 +133,9 @@ function updateLegend(minValue, maxValue, selectedMetric) {
             title = 'Average Medicare Payment';
         }
         // Add the title at the top of the legend
-        div.innerHTML = `<strong>${title}</strong><br><br>`; // Bold title with some spacing
-        const grades = [minValue, (minValue + maxValue) / 2, maxValue]; // Divide the range into three intervals
+        div.innerHTML = `<strong>${title}</strong><br><br>`;
+        // Divide the range into three intervals 
+        const grades = [minValue, (minValue + maxValue) / 2, maxValue]; 
         // Define color scale for the legend based on the metric
         const colorScale = d3.scaleLinear()
             .domain([minValue, maxValue])
@@ -149,7 +150,7 @@ function updateLegend(minValue, maxValue, selectedMetric) {
                 : formatCurrency(grades[i]); // Format as USD for monetary values
             div.innerHTML +=
                 '<i style="background:' + colorScale(grades[i]) + '; width: 18px; height: 18px; display: inline-block; margin-right: 5px;"></i> ' +
-                formattedGrade + '<br>'; // No ranges, just one value per line
+                formattedGrade + '<br>';
         }
         return div;
     };
