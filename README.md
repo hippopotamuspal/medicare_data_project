@@ -1,5 +1,6 @@
 # The Cost of Healthcare in the United States
 ### Quinn Daley - Nicholas Fussy - Joseph Kennedy - William Levine
+![dashboard](https://github.com/user-attachments/assets/874a55d2-585b-4172-8057-7663da816b95)
 
 ## Overview
 This repository contains the necessary resources to run a webpage which visualizes data from Medicare Inpatient Hospitals in 2022. It has information for location, service/diagnosis type, total discharges, out-of-pocket costs, and amounts covered by Medicare. The webpage aims to answer the following questions about the data:
