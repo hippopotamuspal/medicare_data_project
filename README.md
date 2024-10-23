@@ -64,7 +64,7 @@ After the data was imported into a PostgreSQL database in pgAdmin, we used SQLAl
 We used JavaScript and HTML to build the site which allows the user to interact with the data set. The HTML file, titled `index.html`, can be found in the `templates` folder. The JavaScript file, titled `app.js`, can be found in the `static` folder.
 
 ### New Library - Bootstrap
-Bootstrap was used to enhance the layout and responsiveness of the site. It provides the grid system, navigation bars, and buttons that allow the user to interact with different visualizations on the webpage. We used it to create cards that would house our various `form-select` classed "<div>"s.
+Bootstrap was used to enhance the layout and responsiveness of the site. It provides the grid system, navigation bars, and buttons that allow the user to interact with different visualizations on the webpage. We used it to create cards that would house our various `form-select` classed HTML objects.
 
 ### Data Ethics
 The dataset used for this project was already aggregated, ensuring that no personally identifiable information was included. To maintain transparency, all data cleaning steps, assumptions, and transformations have been documented and shared with lecturers. This ensures the reproducibility of the analysis and holds us accountable for any decisions made based on this work. The findings from this analysis are intended solely for use by the Data Analytics and Visualization Bootcamp at the University of Minnesota.
