@@ -79,3 +79,5 @@ US States GEOJSON: https://github.com/PublicaMundi/MappingAPI/blob/master/data/g
 GitHub Project used for inspiration on using Flask: https://github.com/mileslucey/airbnb_dashboard/tree/master
 
 In addition to these sites, ChatGPT was utlized in the polishing of the code to ensure that the visualizations, scripts, and datasets worked properly.
+
+Link to the presentation: https://docs.google.com/presentation/d/17n71swIUCKwYSaMtm_8_TUNbOkOXrr3eTyBO_1bsInk/edit?usp=sharing
