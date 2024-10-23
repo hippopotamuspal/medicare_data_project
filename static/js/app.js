@@ -301,11 +301,13 @@ function buildCharts(state) {
         //bar chart
         Plotly.newPlot('topConditionsChart', [bar_trace], bar_layout);
     
+        // Calculate the number of records
+        let num_records = state_data.length;
 
-        // Aggregate the values for the pie chart via using d3 accumulator
-        let avg_covered_charge = state_data.reduce((acc, d) => acc + (d.avg_covered_charge || 0), 0);
-        let avg_medicare_payment = state_data.reduce((acc, d) => acc + (d.avg_medicare_payment || 0), 0);
-        let avg_oop = state_data.reduce((acc, d) => acc + (d.avg_oop || 0), 0);
+        // Aggregate the average covered charge, average Medicare payment, and average OOP payment
+        let avg_covered_charge = state_data.reduce((acc, d) => acc + (d.avg_covered_charge || 0), 0) / num_records;
+        let avg_medicare_payment = state_data.reduce((acc, d) => acc + (d.avg_medicare_payment || 0), 0) / num_records;
+        let avg_oop = state_data.reduce((acc, d) => acc + (d.avg_oop || 0), 0) / num_records;
 
         console.log("Covered Charge:", avg_covered_charge, "Medicare Payment:", avg_medicare_payment, "Out-of-Pocket:", avg_oop);
 
@@ -321,17 +323,25 @@ function buildCharts(state) {
             currencyFormatter.format(avg_oop)
         ];
 
+        // Calculate the unpaid portion of the covered charge
+        let unpaid_portion = avg_covered_charge - (avg_medicare_payment + avg_oop);
+
+        // Update the pie chart data to include the unpaid portion
         let pie_data = {
-            values: [avg_covered_charge, avg_medicare_payment, avg_oop],
-            labels: ['Average Covered Charge', 'Medicare Payment', 'Out-of-Pocket Payment'],
+            values: [avg_medicare_payment, avg_oop, unpaid_portion],
+            labels: ['Medicare Payment', 'Out-of-Pocket Payment', 'Unpaid Portion'],
             type: 'pie',
-            textinfo: 'label+percent', // Show label and value on the pie chart
-            text: formatted_values, // Use formatted values for hover text
+            textinfo: 'label+percent', // Show label and percentage
+            text: [
+                currencyFormatter.format(avg_medicare_payment),  // Medicare payment formatted as currency
+                currencyFormatter.format(avg_oop),               // OOP payment formatted as currency
+                currencyFormatter.format(unpaid_portion)         // Unpaid portion formatted as currency
+            ],
             hoverinfo: 'label+text',
             marker: {
-                colors: ['rgba(13, 52, 143, 0.7)',  // Variation of Blue
-                         'rgba(20, 80, 180, 0.7)',  // Variation of Blue
-                         'rgba(35, 37, 300, 0.7)'   // Deep Sapphire Blue
+                colors: ['rgba(13, 52, 143, 0.7)',  // Variation of Blue for Medicare
+                        'rgba(20, 80, 180, 0.7)',  // Variation of Blue for OOP
+                        'rgba(100, 100, 100, 0.7)' // Gray for unpaid portion
                 ]
             }
         };
